@@ -6,6 +6,11 @@
     let api_urlDynamic;
     let api_urlSpecies;
     let api_urlEvolve;
+    let pokeImage = document.querySelector("#poke-image")
+    let pokeName = document.querySelector("#pokename");
+    let pokemID = document.querySelector("#pokemid");  
+    let pokemonMoves = document.getElementById("geenpokemoves");
+
 
     
     let pokeEvolveName = document.querySelector("#poke-evolve-name");
@@ -53,8 +58,8 @@
         if (dataDex["evolves_from_species"]) {
             evolveName = dataDex["evolves_from_species"]["name"];
             api_urlEvolve = 'https://pokeapi.co/api/v2/pokemon/' + evolveName;
-            pokeEvolveName.innerHTML = (`This pokemon evolves from ${evolveName}`);
-            getDataEvolve()
+            pokeEvolveName.innerHTML = (`This pokemon evolves from ${evolveName.charAt(0).toUpperCase() + evolveName.slice(1)}`);
+            getDataEvolve();
 
     // ADDED THE ELSE BECAUSE IF I WENT TO IVY AND BACK TO BULBA, BULBA SHOWED UP AS AN EVOLUTION (=INCORRECT)
 
@@ -75,18 +80,15 @@
     
 
     function putPokemonOnHtml(pokemon) {
-        pokeTarget = document.getElementById("target");
-        pokeImage = document.createElement("img");
-        pokeTarget.appendChild(pokeImage);
         pokeImage.src = pokemon.image;
-
-        pokeName = document.querySelector("#pokename");
+       
+       
         pokeName.innerHTML = pokemon.name.toUpperCase();
 
-        pokemID = document.querySelector("#pokemid");
+        
         pokemID.innerHTML = "#" + pokemon.id;
 
-        pokemonMoves = document.getElementById("geenpokemoves");
+        
         pokemonMoves.innerHTML = `1.${pokemon.pokeMove1.charAt(0).toUpperCase() + pokemon.pokeMove1.slice(1)} 2.${pokemon.pokeMove2.charAt(0).toUpperCase() + pokemon.pokeMove2.slice(1)} 3.${pokemon.pokeMove3.charAt(0).toUpperCase() + pokemon.pokeMove3.slice(1)} 4.${pokemon.pokeMove4.charAt(0).toUpperCase() + pokemon.pokeMove4.slice(1)}`
 
 
