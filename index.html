@@ -11,14 +11,27 @@
 
 <body>
     <h1>PokeDex!</h1>
-    <div id="target" src="">test div</div>
-    
+    <div class="container">
+
+        <div class="block1"> Box One
+            <div id="target" src=""></div>
+            <!--image left-->
+
+        </div>
+        <div class="block2">
+            <div id="pokename"></div> <!-- name right-->
+            <div id="pokemid"></div> <!-- id right -->
+            <div id="geenpokemoves"></div> <!-- moves right -->
+        </div>
+    </div>
+
+
     <form action>
         <label for="inputfield">Give Pokémon ID/Name</label><br>
         <input type="text" id="inputfield" name="inputPoke">
         <button type="button" id="run">Run</button>
     </form>
-    
+
     <script src="scripts.js"></script>
 </body>
 

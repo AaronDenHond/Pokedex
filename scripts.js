@@ -1,14 +1,18 @@
 (() => {
-    //getting the pokemon data
+
     //we need to show name, ID, image (sprite) and 4 moves
+
     let api_url = `https://pokeapi.co/api/v2/pokemon/`;
     let api_urlDynamic;
+    
+
+    //getting the pokemon data via API
 
     async function getPokemon() {
         const response = await fetch(api_urlDynamic);
         const data = await response.json();
 
-        //making every pokemon an object with necessary info via API
+     //making every pokemon an object with necessary info via API data
         const pokemon = {
             name: data.name,
             id: data.id,
@@ -19,24 +23,28 @@
             pokeMove4: data.moves[3].move.name,
 
         };
-        console.log(pokemon);
-        /* pokemon.name = data.name;
-        pokemon.id = data.id;
-        pokemon.image = data.sprites.front_default; */
-        /*  pokemon.moves = data.moves.slice([0],[4]);
-         console.log(pokemon.moves);
-         data.moves.forEach(move => {
-             pokemon.move = pokemon.move + " " + move.move.name ;
-         })
-          */
-
-        //trying to put poke object in html div now 
+        
+        //check evolution
+       
+        
+      
+        //trying to display pokemon object in html div now   
         pokeTarget = document.getElementById("target");
-        pokeTarget.innerHTML = pokemon.name + " " + pokemon.id + " " + pokemon.pokeMove1 + " " + pokemon.pokeMove2 + " " + pokemon.pokeMove3 + " " + pokemon.pokeMove4;
         pokeImage = document.createElement("img");
         pokeTarget.appendChild(pokeImage);
         pokeImage.src = data.sprites.front_default;
 
+        pokeName = document.querySelector("#pokename");
+        pokeName.innerHTML = pokemon.name.toUpperCase();
+
+        pokemID = document.querySelector("#pokemid");
+        pokemID.innerHTML = "#"+ pokemon.id;
+
+        pokemonMoves = document.getElementById("geenpokemoves");
+        pokemonMoves.innerHTML = `1.${pokemon.pokeMove1.charAt(0).toUpperCase() + pokemon.pokeMove1.slice(1)} 2.${pokemon.pokeMove2.charAt(0).toUpperCase() + pokemon.pokeMove2.slice(1)} 3.${pokemon.pokeMove3.charAt(0).toUpperCase() + pokemon.pokeMove3.slice(1)} 4.${pokemon.pokeMove4.charAt(0).toUpperCase() + pokemon.pokeMove4.slice(1)}`
+        
+       
+     
 
 
     };
@@ -44,8 +52,11 @@
     document.getElementById("run").addEventListener("click", () => {
         pokeID = document.getElementById("inputfield").value;
         api_urlDynamic = api_url + pokeID;
-
+        
+        
         getPokemon();
+        
+        pokeImage.src = "";
 
     });
 })();
